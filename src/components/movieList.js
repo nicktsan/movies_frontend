@@ -4,16 +4,16 @@ import axios from 'axios';
 
 export default class MovieList extends React.Component {
     state = {
-        movies: []
+        movie: []
     }
 
     componentDidMount() {
-        const url = process.env.REACT_APP_URL
-        //console.log("REACT_APP_URL:" + url)
+        const url = process.env.REACT_APP_SCAN_URL + "items"
+        //console.log("REACT_APP_SCAN_URL:" + url)
         axios.get(url)
             .then(res => {
-                const movies = res.data;
-                this.setState({ movies });
+                const movie = res.data;
+                this.setState({ movie });
             })
     }
 
@@ -21,7 +21,7 @@ export default class MovieList extends React.Component {
         return (
             <ul>
                 {
-                    this.state.movies
+                    this.state.movie
                         .map(movie =>
                             <li key={[movie.year, movie.title]}>{movie.year}, {movie.title}, {movie.rentPrice}, {movie.buyPrice} </li>
                         )
